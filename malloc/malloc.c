@@ -974,7 +974,9 @@ int      __posix_memalign(void **, size_t, size_t);
 #define M_MMAP_MAX             -4
 
 #ifndef DEFAULT_MMAP_MAX
-#define DEFAULT_MMAP_MAX       (65536)
+// Patch to disable the use of mmap in malloc, since this will
+// cause issue when work with proxy kernel (clamp the brk)
+#define DEFAULT_MMAP_MAX       (0)
 #endif
 
 #include <malloc.h>
